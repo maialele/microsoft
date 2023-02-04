@@ -1,0 +1,15 @@
+trigger:
+- main
+
+pool:
+  name: 'default'
+  vmImage: 'agent1'
+
+steps:
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'script-connection'
+    ScriptType: 'FilePath'
+    ScriptPath: './storage_server.ps1'
+    ScriptArguments: -Location 'centralus' -ResourceGroupName 'mayaResourceGroup' -TemplateFile storageTemplate.json
+    azurePowerShellVersion: 'LatestVersion'
