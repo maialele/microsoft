@@ -6,10 +6,10 @@ pool:
   vmImage: 'agent1'
 
 steps:
-- task: AzurePowerShell@5
+- task: AzureResourceGroupDeployment@2
   inputs:
     azureSubscription: 'mayaServiceConnection'
-    ScriptType: 'FilePath'
-    ScriptPath: './storage_server.ps1'
-    ScriptArguments: -Location 'centralus' -ResourceGroupName 'mayaResourceGroup' -TemplateFile storageTemplate.json
-    azurePowerShellVersion: 'LatestVersion'
+    resourceGroupName: 'mayaResourceGroup'
+    location: 'northeurope'
+    templateLocation: 'Linked artifact'
+    csmFile: 'storageTemplate.json'
