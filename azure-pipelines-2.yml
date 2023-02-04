@@ -8,7 +8,7 @@ trigger:
 
 pool:
   name: 'default'
-  vmImage: 'DESKTOP-7CQHLHB'
+  vmImage: 'agent1'
 
 steps:
 - script: echo Hello, world!
