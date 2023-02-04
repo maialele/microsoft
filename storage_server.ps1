@@ -1,7 +1,7 @@
-$rg = 'arm-introduction-01'
+$rg = 'mayaResourceGroup'
 New-AzResourceGroup -Name $rg -Location northeurope -Force
 
 New-AzResourceGroupDeployment `
-    -Name 'new-storage' `
+    -Name 'storage-linux' `
     -ResourceGroupName $rg `
     -TemplateFile 'storageTemplate.json' 
