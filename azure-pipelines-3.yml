@@ -8,7 +8,7 @@ pool:
 steps:
 - task: AzurePowerShell@3
   inputs:
-    azureSubscription: 'maialele'
+    azureSubscription: 'mayaServiceConnection'
     ScriptType: 'FilePath'
     ScriptPath: './storage_server.ps1'
     ScriptArguments: -Location 'centralus' -ResourceGroupName 'mayaResourceGroup' -TemplateFile storageTemplate.json
