@@ -1,7 +1,7 @@
 #!/bin/bash
 #create
-storageAccount="<storage-account>"
-containerName="demo-container"
+storageAccount="mayastorage01"
+containerName="container_A"
 
 # Create a container object
 az storage container create \
