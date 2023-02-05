@@ -6,10 +6,23 @@ pool:
   vmImage: 'agent1'
 
 steps:
-- task: AzureResourceGroupDeployment@2
+#- task: AzureResourceGroupDeployment@2
+  #inputs:
+    #azureSubscription: 'mayaServiceConnection'
+    #resourceGroupName: 'mayaResourceGroup'
+    #location: 'northeurope'
+    #templateLocation: 'Linked artifact'
+    #csmFile: 'storageTemplate.json'
+- task: AzureResourceManagerTemplateDeployment@3
   inputs:
-    azureSubscription: 'mayaServiceConnection'
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'copy-connection'
+    subscriptionId: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
+    action: 'Create Or Update Resource Group'
     resourceGroupName: 'mayaResourceGroup'
     location: 'northeurope'
-    templateLocation: 'Linked artifact'
-    csmFile: 'storageTemplate.json'
+    templateLocation: 'storageTemplate.json'
+    #csmFileLink: '$(AzureFileCopy.StorageContainerUri)templates/mainTemplate.json$(AzureFileCopy.StorageContainerSasToken)'
+    #csmParametersFileLink: '$(AzureFileCopy.StorageContainerUri)templates/mainTemplate.parameters.json$(AzureFileCopy.StorageContainerSasToken)'
+    deploymentMode: 'Incremental'
+    deploymentName: 'deploy1'
