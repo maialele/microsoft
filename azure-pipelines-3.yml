@@ -19,7 +19,7 @@ steps:
     azureResourceManagerConnection: 'mayaServiceConnect'
     subscriptionId: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
     action: 'Create Or Update Resource Group'
-    resourceGroupName: 'mayaResourceGroup'
+    resourceGroupName: 'myResourceGroup'
     location: 'francecentral'
     templateLocation: 'Linked artifact'
     csmFileLink: 'storageTemplate.json'
