@@ -20,3 +20,13 @@ steps:
     #csmParametersFileLink: '$(AzureFileCopy.StorageContainerUri)templates/mainTemplate.parameters.json$(AzureFileCopy.StorageContainerSasToken)'
     deploymentMode: 'Incremental'
     deploymentName: 'deploy1'
+
+steps:
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'mayaServiceConnection'
+    ScriptType: 'FilePath'
+    ScriptPath: './Deploy-AzTemplate.ps1'
+    ScriptArguments: -Location 'centralus' -ResourceGroupName 'demogroup' -TemplateFile templates\mainTemplate.json
+    azurePowerShellVersion: 'LatestVersion'
+
