@@ -6,27 +6,9 @@ pool:
   vmImage: 'agent1'
 
 steps:
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'mayaServiceConnect'
-    subscriptionId: 'a8108c2b-496c-424d-8347-ecc8afb6384c'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: 'mayaResourceGroup'
-    location: 'francecentral'
-    templateLocation: 'Linked artifact'
-    csmFileLink: 'storageTemplate.json'
-    #csmFileLink: '$(AzureFileCopy.StorageContainerUri)templates/mainTemplate.json$(AzureFileCopy.StorageContainerSasToken)'
-    #csmParametersFileLink: '$(AzureFileCopy.StorageContainerUri)templates/mainTemplate.parameters.json$(AzureFileCopy.StorageContainerSasToken)'
-    deploymentMode: 'Incremental'
-    deploymentName: 'deploy1'
-
-steps:
 - task: AzurePowerShell@5
+  displayName: 'Create storage accounts'
   inputs:
-    azureSubscription: 'mayaServiceConnection'
+    azureSubscription: 'MSEC_Candidates_Homeworks_new'
     ScriptType: 'FilePath'
-    ScriptPath: './Deploy-AzTemplate.ps1'
-    ScriptArguments: -Location 'centralus' -ResourceGroupName 'demogroup' -TemplateFile templates\mainTemplate.json
-    azurePowerShellVersion: 'LatestVersion'
-
+    FilePath: 'deployStorage_Server.ps1'
