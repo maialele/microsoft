@@ -9,6 +9,6 @@ steps:
 - task: AzurePowerShell@5
   displayName: 'Create storage accounts'
   inputs:
-    azureSubscription: 'MSEC_Candidates_Homeworks_new'
+    azureSubscription: 'mayaARMServiceConnection'
     ScriptType: 'FilePath'
     FilePath: 'deployStorage_Server.ps1'
