@@ -1,13 +1,12 @@
-$rg = 'mayaResourceGroup'
-New-AzResourceGroup -Name $rg -Location northeurope -Force
 
-New-AzResourceGroupDeployment `
-    -Name 'storage' `
-    -ResourceGroupName $rg `
-    -TemplateFile 'storageTemplate.json' 
-    
-New-AzResourceGroupDeployment `
-    -Name 'linux servier' `
-    -ResourceGroupName $rg `
-    -TemplateFile 'linuxTemplate.json' 
+$resourceGroupName = "mayaResourceGroup"
+$location = "francecentral"
+$templateFile = "storageTemplate.json"
 
+# Create resource group
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+
+# Deploy template
+New-AzDeployment -Name "deploy-storage-accounts" `
+                 -ResourceGroupName $resourceGroupName `
+                 -TemplateFile $templateFile `
