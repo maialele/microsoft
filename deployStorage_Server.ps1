@@ -3,10 +3,9 @@ $resourceGroupName = "mayaResourceGroup"
 $location = "francecentral"
 $templateFile = "storageTemplate.json"
 
-# Create resource group
-New-AzResourceGroup -Name $resourceGroupName -Location $location
+# Deploy storage
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFile
 
-# Deploy template
-New-AzDeployment -Name "deploy-storage-accounts" `
-                 -ResourceGroupName $resourceGroupName `
-                 -TemplateFile $templateFile `
+$templateFile = "linuxTemplate.json"
+# Deploy linux server
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFile
