@@ -6,7 +6,7 @@ pool:
   vmImage: 'agent1'
 
 steps:
-- task: AzurePowerShell@3
+- task: AzurePowerShell@3 # Create two storage accounts and a windows server
   displayName: 'Create storage accounts and windows server'
   inputs:
     azureSubscription: 'mayaServiceConnect'
@@ -18,9 +18,9 @@ steps:
     SourcePath: 'copyBlobs.ps1'
     TargetPath: 'C:\\copyBlobs.ps1'
     azureSubscription: $SUBSCRIPTION_ID
-    machineName: 'simple-vm' # Replace with your virtual machine name
+    machineName: 'simple-vm'
 
-- task: AzureVM@2 # Use the Azure Virtual Machine task to run the script on the virtual machine
+- task: AzureVM@2 # Run the command on the virtual machine
   inputs:
     azureSubscription: $SUBSCRIPTION_ID
     vmName: 'simple-vm'
