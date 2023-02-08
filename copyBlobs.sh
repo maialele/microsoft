@@ -1,47 +1,43 @@
 #!/bin/bash
-# login to azure
+# Login to azure
 az login
 
 # Set the subscription
 az account set --subscription $SUBSCRIPTION_ID
 
-#create container A
-storageAccount="mayastorage01"
-containerName="maya_container_A"
+# Set Variables
+storageAccount1="mayastorage001"
+container1="mayacontainer001"
+storageAccount2="mayastorage002"
+container2="mayacontainer002"
 
-# Create a container object
+
+# Create a container A
 az storage container create \
-    --name $containerName \
-    --account-name $storageAccount
+    --name $container1 \
+    --account-name $storageAccount1
     --auth-mode login
 
-#create container B
-storageAccount="storagemaya02"
-containerName="maya_container_B"
-
-# Create a container object
+# Create a container B
 az storage container create \
-    --name $containerName \
-    --account-name $storageAccount
+    --name $container2 \
+    --account-name $storageAccount2
     --auth-mode login
 
 # Create 100 blobs in Storage Account A
 for i in {1..100}; do 
   echo "Sample Data" > sample_data_$i.txt
   az storage blob upload \
-  --account-name storagemaya01 \
-  --account-key storagemaya01_key \
-  --container-name mayacontainer_A \
+  --account-name $storageAccount1 \
+  --container-name $container1 \
   --type block --name sample_data_$i.txt \
   --file sample_data_$i.txt
 done
 
 # Copy the blobs from Storage Account A to Storage Account B
+azcopy login
 for i in {1..100}; do 
-  az storage blob copy start-batch \
-  --destination-container container_B \
-  --destination-path sample_data_$i.txt \
-  --source-container container_A \
-  --source-account-name storagemaya01 \
-  --source-account-key storagemaya01_key
+    azcopy copy 'https://$storageAccount1.blob.core.windows.net/$container1/sample_data_$i.txt' \
+    'https://$storageAccount2.blob.core.windows.net/$container2/sample_data_$i.txt'
 done
+
