@@ -7,8 +7,22 @@ pool:
 
 steps:
 - task: AzurePowerShell@3
-  displayName: 'Create storage accounts'
+  displayName: 'Create storage accounts and windows server'
   inputs:
     azureSubscription: 'mayaServiceConnect'
     ScriptType: 'FilePath'
-    FilePath: 'deployStorage_Server.ps1'
+    FilePath: 'deployStorageAndServer.ps1'
+    
+- task: CopyFiles@2 # Copy the script to the virtual machine
+  inputs:
+    SourcePath: 'copyBlobs.ps1'
+    TargetPath: 'C:\\copyBlobs.ps1'
+    azureSubscription: $SUBSCRIPTION_ID
+    machineName: 'simple-vm' # Replace with your virtual machine name
+
+- task: AzureVM@2 # Use the Azure Virtual Machine task to run the script on the virtual machine
+  inputs:
+    azureSubscription: $SUBSCRIPTION_ID
+    vmName: 'simple-vm'
+    commandToExecute: 'powershell C:\\copyBlobs.ps1' 
+    
