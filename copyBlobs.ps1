@@ -1,4 +1,3 @@
-#!/bin/bash
 # Login to azure
 az login
 
