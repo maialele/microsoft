@@ -5,10 +5,12 @@ az login
 az account set --subscription $SUBSCRIPTION_ID
 
 # Set Variables
-storageAccount1="mayastorage001"
-container1="mayacontainer001"
-storageAccount2="mayastorage002"
-container2="mayacontainer002"
+$storageAccount1="mayastorage001"
+$container1="mayacontainer001"
+$storageAccount2="mayastorage002"
+$container2="mayacontainer002"
+
+
 
 
 # Create a container A
