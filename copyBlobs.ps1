@@ -24,19 +24,19 @@ az storage container create \
     --auth-mode login
 
 # Create 100 blobs in Storage Account A
-for i in {1..100}; do 
-  echo "Sample Data" > sample_data_$i.txt
-  az storage blob upload \
-  --account-name $storageAccount1 \
-  --container-name $container1 \
-  --type block --name sample_data_$i.txt \
-  --file sample_data_$i.txt
-done
+for ($i=1; $i -le 100; $i++) {
+    "Sample Data" | Out-File -FilePath "sample_data_$i.txt"
+    az storage blob upload `
+        --account-name $storageAccount1 `
+        --container-name $container1 `
+        --type block `
+        --name "sample_data_$i.txt" `
+        --file "sample_data_$i.txt"
+}
 
 # Copy the blobs from Storage Account A to Storage Account B
 azcopy login
-for i in {1..100}; do 
-    azcopy copy 'https://$storageAccount1.blob.core.windows.net/$container1/sample_data_$i.txt' \
-    'https://$storageAccount2.blob.core.windows.net/$container2/sample_data_$i.txt'
-done
-
+for ($i=1; $i -le 100; $i++) {
+    azcopy copy "https://$storageAccount1.blob.core.windows.net/$container1/sample_data_$i.txt" `
+        "https://$storageAccount2.blob.core.windows.net/$container2/sample_data_$i.txt"
+}
