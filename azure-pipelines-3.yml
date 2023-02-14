@@ -20,9 +20,3 @@ steps:
     azureSubscription: 'mayaServiceConnect'
     machineName: 'simple-vm'
 
-- task: AzureVM@2 # Run the command on the virtual machine
-  inputs:
-    azureSubscription: 'mayaServiceConnect'
-    vmName: 'simple-vm'
-    commandToExecute: 'powershell C:\\copyBlobs.ps1' 
-    
