@@ -17,12 +17,12 @@ steps:
   inputs:
     SourcePath: 'copyBlobs.ps1'
     TargetPath: 'C:\\copyBlobs.ps1'
-    azureSubscription: $SUBSCRIPTION_ID
+    azureSubscription: ${{ secrets.SUBSCRIPTION_ID }}
     machineName: 'simple-vm'
 
 - task: AzureVM@2 # Run the command on the virtual machine
   inputs:
-    azureSubscription: $SUBSCRIPTION_ID
+    azureSubscription: ${{ secrets.SUBSCRIPTION_ID }}
     vmName: 'simple-vm'
     commandToExecute: 'powershell C:\\copyBlobs.ps1' 
     
